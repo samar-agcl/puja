@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bishwakarma Puja — 3D Invite</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie_light.min.js" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+
+  <style>
+    :root {
+      --primary-green: #1a8917;
+      --primary-red: #e11d48;
+      --primary-blue: #2563eb;
+      --bg1: linear-gradient(135deg, #bbf7d0, #fecaca, #bfdbfe);
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --ink: #1f2937;
+      --accent: var(--primary-blue);
+      --halo: rgba(37, 99, 235, 0.4);
+      --panel: rgba(255, 255, 255, 0.9);
+      --border: rgba(0, 0, 0, 0.08);
+      --shadow: rgba(0, 0, 0, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--bg1);
+      background-size: 300% 300%;
+      animation: bgShift 16s ease-in-out infinite;
+      color: var(--ink);
+      transition: background .4s ease, color .3s ease;
+      padding: 12px;
+    }
+
+    @keyframes bgShift {
+      0% {
+        background-position: 0% 50%
+      }
+
+      50% {
+        background-position: 100% 50%
+      }
+
+      100% {
+        background-position: 0% 50%
+      }
+    }
+
+    .wrap {
+      width: min(920px, 95vw);
+      position: relative;
+      perspective: 1000px;
+      padding: clamp(8px, 2vw, 14px);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      color: var(--accent);
+      font-size: clamp(14px, 2.6vw, 18px);
+    }
+
+    .brand img {
+      width: clamp(60px, 16vw, 80px);
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, .12);
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: clamp(13px, 2.4vw, 14px);
+      box-shadow: 0 2px 0 #f3f3f3, 0 8px 18px rgba(0, 0, 0, .08);
+      transition: all .2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, .15);
+    }
+
+    .btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px var(--shadow), inset 0 1px 0 rgba(255, 255, 255, .7);
+      padding: clamp(16px, 3vw, 28px);
+      transform-style: preserve-3d;
+      transition: transform .08s ease, box-shadow .3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .3);
+    }
+
+    .toran {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: clamp(56px, 10vw, 82px);
+      pointer-events: none;
+      background: radial-gradient(circle at 24px 46%, var(--primary-red) 0 12px, var(--primary-green) 12px 16px, transparent 17px);
+      background-repeat: repeat-x;
+      background-size: 200px 100%;
+      animation: sway 3.6s ease-in-out infinite;
+    }
+
+    .toran::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: clamp(8px, 1.8vw, 12px);
+      background: linear-gradient(90deg, var(--primary-green), var(--primary-red), var(--primary-blue));
+      opacity: .85;
+    }
+
+    @keyframes sway {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0.6deg)
+      }
+
+      50% {
+        transform: translateY(3px) rotate(-0.6deg)
+      }
+    }
+
+    .title {
+      text-align: center;
+      margin-top: clamp(24px, 4vw, 38px);
+      font-family: "Great Vibes", serif;
+      font-size: clamp(28px, 6vw, 58px);
+      color: var(--accent);
+      text-shadow: 0 2px 0 #fff, 0 0 18px rgba(59, 130, 246, 0.5);
+    }
+
+    .photo-wrap {
+      margin: 12px auto 6px;
+      width: clamp(120px, 26vw, 170px);
+      height: clamp(120px, 26vw, 170px);
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    .rays {
+      position: absolute;
+      inset: -14%;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, rgba(0, 0, 0, 0), var(--halo), rgba(0, 0, 0, 0) 30%);
+      filter: blur(6px);
+      animation: spinRays 12s linear infinite;
+    }
+
+    @keyframes spinRays {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .photo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .18);
+    }
+
+    .countdown {
+      text-align: center;
+      font-weight: 800;
+      margin-top: 6px;
+      color: var(--primary-green);
+      font-size: clamp(15px, 3.8vw, 20px);
+      letter-spacing: .5px;
+    }
+
+    .lang-toggle {
+      display: flex;
+      gap: 8px;
+      margin: 8px 0 0;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .sections {
+      display: row;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: clamp(12px, 2.8vw, 16px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .06);
+      font-size: clamp(14px, 3.6vw, 16px);
+    }
+
+    .panel h3 {
+      margin: 0 0 10px;
+      color: var(--primary-red);
+      letter-spacing: .3px;
+      font-size: clamp(16px, 4.2vw, 20px);
+    }
+
+    .assamese {
+      font-family: "Noto Serif Assamese", serif;
+    }
+
+    .layer {
+      position: absolute;
+      pointer-events: none;
+      opacity: .32;
+      filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .12));
+      transition: transform .06s ease-out;
+    }
+
+    .layer.flower {
+      font-size: clamp(36px, 9vw, 60px);
+    }
+
+    .layer.emoji-gear {
+      font-size: clamp(42px, 10vw, 70px);
+    }
+
+    @media(max-width:860px) {
+      .sections {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media(max-width:480px) {
+      .brand span {
+        display: none;
+      }
+
+      .btn {
+        padding: 10px 12px;
+      }
+
+      .toran {
+        height: 56px;
+      }
+    }
+
+    .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* space between logo & text wrapper */
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    padding: 10px 18px;
+    margin-bottom: 14px;
+    animation: slideDown 0.8s ease-out;
+  }
+
+  @keyframes slideDown {
+    0% { opacity: 0; transform: translateY(-30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 800;
+    color: var(--accent, #2563eb);
+  }
+
+  .brand img {
+    width: clamp(60px, 15vw, 80px);
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+  }
+  .brand img:hover { transform: rotate(-3deg) scale(1.05); }
+
+  /* Centered Text */
+  .header-title {
+    flex: 1;
+    text-align: center;
+    font-size: clamp(16px, 2.8vw, 20px);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent, #2563eb);
+    animation: glow 2.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from { text-shadow: 0 0 5px rgba(37, 99, 235, 0.4); }
+    to   { text-shadow: 0 0 18px rgba(37, 99, 235, 0.8); }
+  }
+
+  @media (max-width: 480px) {
+    .topbar { flex-wrap: wrap; justify-content: center; }
+    .header-title { margin-top: 6px; }
+  }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+       <div class="brand">
+    <img src="http://10.10.30.53/LogoNew.JPG" alt="AGCL Logo" onerror="this.style.display='none'">
+  </div>
+
+  <span class="header-title lang lang-en">✨ Invitation ✨</span>
+  <span class="header-title lang lang-as"  style="display:none">✨ নিমন্ত্ৰণ ✨</span>
+  
+    </div>
+    <!-- <div class="topbar">
+      <div class="brand">
+        <img src="http://10.10.30.53/LogoNew.JPG" alt="AGCL Logo" onerror="this.style.display='none'">
+        <span>Invitation</span>
+      </div>
+    </div> -->
+
+    <div class="layer flower" data-depth="0.04" style="left:-8px;top:120px;">🌸</div>
+    <div class="layer flower" data-depth="0.06" style="right:10px;top:240px;">🌼</div>
+    <div class="layer emoji-gear" data-depth="0.03" style="left:12px;bottom:60px;">⚙️</div>
+
+    <div class="card" id="card">
+      <div class="toran"></div>
+      <div class="title lang lang-en"> 🌼 Jay Shree Vishwakarma 🌼</div>
+      <div class="title lang lang-as" style="display:none"> 🌼 জয় শ্ৰী বিশ্বকর্মা 🌼</div>
+
+      <div class="photo-wrap">
+        <div class="rays"></div>
+        <img class="photo"
+          src="https://as2.ftcdn.net/jpg/16/62/76/73/1000_F_1662767372_TfZctRa64th3tsUt0SSxLpYmzduY4b18.jpg"
+          alt="Lord Bishwakarma" loading="lazy">
+      </div>
+
+      <div id="countdown" class="countdown">Starts in …</div>
+
+      <div class="lang-toggle">
+        <button class="btn active" id="btn-en">EN</button>
+        <button class="btn" id="btn-as">অসমীয়া</button>
+      </div>
+
+      <div class="sections" style="text-align: center;">
+        <div class="panel lang lang-en">
+          <!-- <h3>Invitation</h3> -->
+          <p>The IIS Department, AGCL, warmly invites you to participate in the auspicious Viswakarma Puja </p><br/>
+          <p><strong>Date:</strong> 17 September 2025</p>
+          <p><strong>Time:</strong> 10:00 AM onwards</p>
+          <p><strong>Venue:</strong> AGCL IIS Department, Duliajan</p>
+        </div>
+
+        <div class="panel lang lang-as" style="display:none">
+          <!-- <h3 class="assamese">নিমন্ত্ৰণ</h3> -->
+          <p class="assamese">AGCL IIS বিভাগ, আপোনাক পবিত্ৰ বিশ্বকর্মা পূজাত অংশগ্ৰহণ কৰিবলৈ আন্তরিক আমন্ত্ৰণ জনাইছে।</p><br/>
+          <p class="assamese"><strong>তাৰিখ:</strong> ১৭ ছেপ্তেম্বৰ, ২০২৫</p>
+          <p class="assamese"><strong>সময়:</strong> পুৱা ১০ বজাৰ পৰা</p>
+          <p class="assamese"><strong>স্থান:</strong> AGCL IIS বিভাগ, ডুলীয়াজান</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="lottieGearLeft" class="layer" data-depth="0.02"
+      style="left:-24px;top:140px;width:clamp(90px,20vw,130px);height:clamp(90px,20vw,130px)"></div>
+    <div id="lottieGearRight" class="layer" data-depth="0.05"
+      style="right:-20px;bottom:80px;width:clamp(100px,22vw,150px);height:clamp(100px,22vw,150px)"></div>
+  </div>
+
+  <script>
+    const EVENT_START_ISO = '2025-09-17T10:00:00+05:30';
+    const cdEl = document.getElementById('countdown');
+    const startTime = new Date(EVENT_START_ISO);
+    function tick() {
+      const diff = startTime - new Date();
+      if (diff <= 0) { cdEl.textContent = 'Puja is starting now!'; return; }
+      const h = Math.floor(diff / 36e5), m = Math.floor(diff % 36e5 / 6e4), s = Math.floor(diff % 6e4 / 1e3);
+      cdEl.textContent = `Starts in ${h}h ${m}m ${s}s`;
+    }
+    tick(); setInterval(tick, 1e3);
+
+    const btnEN = document.getElementById('btn-en'), btnAS = document.getElementById('btn-as');
+    const enBlocks = document.querySelectorAll('.lang-en'), asBlocks = document.querySelectorAll('.lang-as');
+    function showEN() { btnEN.classList.add('active'); btnAS.classList.remove('active'); enBlocks.forEach(x => x.style.display = 'block'); asBlocks.forEach(x => x.style.display = 'none'); }
+    function showAS() { btnAS.classList.add('active'); btnEN.classList.remove('active'); asBlocks.forEach(x => x.style.display = 'block'); enBlocks.forEach(x => x.style.display = 'none'); }
+    btnEN.addEventListener('click', showEN); btnAS.addEventListener('click', showAS);
+
+    const layers = document.querySelectorAll('.layer');
+    let parallaxEnabled = window.matchMedia('(pointer:fine)').matches;
+    document.addEventListener('mousemove', e => {
+      if (!parallaxEnabled) return;
+      const cx = innerWidth / 2, cy = innerHeight / 2;
+      const dx = (e.clientX - cx) / cx, dy = (e.clientY - cy) / cy;
+      layers.forEach(el => {
+        const depth = parseFloat(el.dataset.depth || 0.03);
+        el.style.transform = `translate(${dx * depth * 30}px,${dy * depth * 22}px)`;
+      });
+    });
+
+    const card = document.getElementById('card');
+    const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+    if (parallaxEnabled) {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+        const dx = (e.clientX - cx) / (r.width / 2), dy = (e.clientY - cy) / (r.height / 2);
+        const rotX = clamp(-dy * 6, -6, 6), rotY = clamp(dx * 8, -8, 8);
+        card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = 'rotateX(0deg) rotateY(0deg)'; });
+    }
+
+    function mountLottie(containerId, jsonUrl) {
+      const el = document.getElementById(containerId);
+      if (!window.lottie || !el) return;
+      window.lottie.loadAnimation({ container: el, renderer: 'svg', loop: true, autoplay: true, path: jsonUrl });
+    }
+    mountLottie('lottieGearLeft', 'https://assets5.lottiefiles.com/packages/lf20_9xcyt9.json');
+    mountLottie('lottieGearRight', 'https://assets5.lottiefiles.com/private_files/lf30_gx2uex.json');
+  </script>
+</body>
+
+</html>
